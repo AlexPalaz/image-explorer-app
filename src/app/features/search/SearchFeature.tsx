@@ -10,8 +10,9 @@ import {
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { SearchService } from "./SearchService";
-import SearchContents from "@/app/components/SearchContents/SearchContents";
 import Pagination from "../../components/Pagination/Pagination";
+import { redirect } from "next/navigation";
+import SearchContents from "@/app/components/SearchContents/SearchContents";
 
 function SearchFeatureContent() {
   const { results, term, page, pages } = useSearchContext();
@@ -26,6 +27,7 @@ function SearchFeatureContent() {
 
   const handlePageChange = (page: number) => {
     updatePage(page);
+    window.scrollTo({ top: 0 });
   };
 
   const fetchPhotos = async (value: string, page: number) => {
@@ -37,14 +39,14 @@ function SearchFeatureContent() {
   };
 
   useEffect(() => {
-    fetchPhotos(term, page);
+    if (term) {
+      fetchPhotos(term, page);
+    }
   }, [term, page]);
 
   useEffect(() => {
-    if (debouncedValue) {
-      updateTerm(debouncedValue);
-      updatePage(1);
-    }
+    updateTerm(debouncedValue);
+    updatePage(1);
   }, [debouncedValue]);
 
   return (

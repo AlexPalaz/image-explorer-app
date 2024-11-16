@@ -30,7 +30,7 @@ export type SearchContextState = {
 };
 
 const initialState: SearchContextState = {
-  term: generate() as string,
+  term: "",
   pages: 0,
   page: 1,
   results: [],
@@ -84,7 +84,10 @@ export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const updateTerm = (payload: string) =>
-    dispatch({ type: EAction.UpdateTerm, payload });
+    dispatch({
+      type: EAction.UpdateTerm,
+      payload: payload || (generate() as string),
+    });
   const updatePage = (payload: number) =>
     dispatch({ type: EAction.UpdatePage, payload });
   const updateTotalPages = (payload: number) =>
