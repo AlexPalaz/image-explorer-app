@@ -1,5 +1,7 @@
+import { cookies } from "next/headers";
 import Section from "./components/Section/Section";
 import SearchFeature from "./features/search/SearchFeature";
+import { createClient } from "./utils/supabase/server";
 
 export default async function HomePage() {
   return (
