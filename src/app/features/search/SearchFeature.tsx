@@ -9,10 +9,9 @@ import {
 } from "@/app/contexts/SearchContext";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
-import { SearchService } from "./SearchService";
 import Pagination from "../../components/Pagination/Pagination";
-import { redirect } from "next/navigation";
-import SearchContents from "@/app/components/SearchContents/SearchContents";
+import MasonryPhotos from "@/app/components/MasonryPhotos/MasonryPhotos";
+import { UnsplashPhotoService } from "@/app/services/UnsplashPhotoService";
 
 function SearchFeatureContent() {
   const { results, term, page, pages } = useSearchContext();
@@ -31,7 +30,7 @@ function SearchFeatureContent() {
   };
 
   const fetchPhotos = async (value: string, page: number) => {
-    const result = await SearchService.getPhotos(value, page);
+    const result = await UnsplashPhotoService.getPhotos(value, page);
     if (result?.results?.length) {
       updateResults(result.results);
       updateTotalPages(result.total_pages);
@@ -52,7 +51,7 @@ function SearchFeatureContent() {
   return (
     <div className="flex flex-col gap-12 items-center">
       <SearchBar value={searchValue} onChange={handleSearchChange} />
-      <SearchContents photos={results} />
+      <MasonryPhotos photos={results} />
       <Pagination onPageChange={handlePageChange} page={page} pages={pages} />
     </div>
   );

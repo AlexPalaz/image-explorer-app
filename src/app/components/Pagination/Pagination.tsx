@@ -17,12 +17,14 @@ export default function Pagination({
 
   return (
     <div className="flex gap-2">
-      <button
-        className={`border rounded p-1 mr-4 hover:bg-black hover:text-white transition-all`}
-        onClick={() => onPageChange(page - 1)}
-      >
-        <ChevronLeftIcon />
-      </button>
+      {page > 1 && (
+        <button
+          className={`border rounded p-1 mr-4 hover:bg-black hover:text-white transition-all`}
+          onClick={() => onPageChange(page - 1)}
+        >
+          <ChevronLeftIcon />
+        </button>
+      )}
       {visiblePages.map((pageNumber, index) =>
         pageNumber === "..." ? (
           <span key={`ellipsis-${index}`} className="px-2">
@@ -40,12 +42,14 @@ export default function Pagination({
           </button>
         )
       )}
-      <button
-        className={`border rounded p-1 ml-4 hover:bg-black hover:text-white transition-all`}
-        onClick={() => onPageChange(page + 1)}
-      >
-        <ChevronRightIcon />
-      </button>
+      {page < pages && (
+        <button
+          className={`border rounded p-1 ml-4 hover:bg-black hover:text-white transition-all`}
+          onClick={() => onPageChange(page + 1)}
+        >
+          <ChevronRightIcon />
+        </button>
+      )}
     </div>
   );
 }
