@@ -4,14 +4,17 @@ import SearchBar from "@/app/components/SearchBar/SearchBar";
 import { ProviderRegistry } from "@/app/contexts/ProviderRegistry";
 import {
   SearchProvider,
+  useSearchContext,
   useSearchDispatchContext,
 } from "@/app/contexts/SearchContext";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { SearchService } from "./SearchService";
+import SearchContents from "@/app/components/SearchContents/SearchContents";
 
 function SearchFeatureContent() {
-  const { updateResults } = useSearchDispatchContext();
+  const { results, page, pages } = useSearchContext();
+  const { updateResults, updateTotalPages } = useSearchDispatchContext();
   const [searchValue, setSearchValue] = useState<string>("");
   const [debouncedValue] = useDebounce(searchValue, 500);
 
@@ -23,6 +26,7 @@ function SearchFeatureContent() {
     const result = await SearchService.getPhotos(value);
     if (result?.results?.length) {
       updateResults(result.results);
+      updateTotalPages(result.total_pages);
     }
   };
 
@@ -31,9 +35,10 @@ function SearchFeatureContent() {
   }, [debouncedValue]);
 
   return (
-    <>
+    <div className="flex flex-col gap-12">
       <SearchBar value={searchValue} onChange={handleSearchChange} />
-    </>
+      <SearchContents photos={results} />
+    </div>
   );
 }
 

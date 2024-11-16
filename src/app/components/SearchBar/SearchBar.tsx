@@ -8,7 +8,7 @@ export type SearchProps = {
 export default function SearchBar({ onChange, value }: SearchProps) {
   return (
     <input
-      className="search w-full px-4 bg-transparent border h-8 rounded-full text-sm"
+      className="search w-full px-4 bg-transparent border h-12 rounded-full text-sm"
       placeholder="Search images"
       onChange={onChange}
       value={value}
