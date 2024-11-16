@@ -1,33 +1,36 @@
-import { act, createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { UnsplashPhoto } from "../types/Photos";
+import { generate } from "random-words";
 
 export enum EAction {
-  NextPage = "NEXT_PAGE",
-  PrevPage = "PREV_PAGE",
+  UpdateTerm = "UPDATE_TERM",
+  UpdatePage = "UPDATE_PAGE",
   UpdateResults = "UPDATE_RESULTS",
   UpdateTotalPages = "UPDATE_TOTAL_PAGES",
 }
 
 export type Action =
-  | { type: EAction.NextPage }
-  | { type: EAction.PrevPage }
+  | { type: EAction.UpdateTerm; payload: string }
+  | { type: EAction.UpdatePage; payload: number }
   | { type: EAction.UpdateResults; payload: UnsplashPhoto[] }
   | { type: EAction.UpdateTotalPages; payload: number };
 
 export type SearchDispatchContextState = {
-  goToNextPage: () => void;
-  goToPrevPage: () => void;
+  updateTerm: (payload: string) => void;
+  updatePage: (payload: number) => void;
   updateTotalPages: (payload: number) => void;
   updateResults: (payload: UnsplashPhoto[]) => void;
 };
 
 export type SearchContextState = {
+  term: string;
   pages: number;
   page: number;
   results: UnsplashPhoto[];
 };
 
 const initialState: SearchContextState = {
+  term: generate() as string,
   pages: 0,
   page: 1,
   results: [],
@@ -38,10 +41,10 @@ const reducer = (
   action: Action
 ): SearchContextState => {
   switch (action.type) {
-    case EAction.NextPage:
-      return { ...state, page: state.page + 1 };
-    case EAction.PrevPage:
-      return { ...state, page: Math.max(state.page - 1, 1) };
+    case EAction.UpdateTerm:
+      return { ...state, term: action.payload };
+    case EAction.UpdatePage:
+      return { ...state, page: action.payload };
     case EAction.UpdateTotalPages:
       return { ...state, pages: action.payload };
     case EAction.UpdateResults:
@@ -80,8 +83,10 @@ export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const goToNextPage = () => dispatch({ type: EAction.NextPage });
-  const goToPrevPage = () => dispatch({ type: EAction.PrevPage });
+  const updateTerm = (payload: string) =>
+    dispatch({ type: EAction.UpdateTerm, payload });
+  const updatePage = (payload: number) =>
+    dispatch({ type: EAction.UpdatePage, payload });
   const updateTotalPages = (payload: number) =>
     dispatch({ type: EAction.UpdateTotalPages, payload });
   const updateResults = (payload: UnsplashPhoto[]) =>
@@ -90,7 +95,7 @@ export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <SearchContext.Provider value={state}>
       <SearchDispatchContext.Provider
-        value={{ goToNextPage, goToPrevPage, updateTotalPages, updateResults }}
+        value={{ updateTerm, updatePage, updateTotalPages, updateResults }}
       >
         {children}
       </SearchDispatchContext.Provider>

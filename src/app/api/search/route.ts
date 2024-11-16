@@ -1,13 +1,16 @@
 import { unsplash } from "@/app/utils/unsplash";
 import { NextRequest } from "next/server";
-import { generate } from "random-words";
 
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const term = searchParams.get("term") || "";
+    const page = searchParams.get("page") || 1;
 
-    const res = await unsplash.search.getPhotos({ query: term as string });
+    const res = await unsplash.search.getPhotos({
+      query: term as string,
+      page: page as number,
+    });
 
     if (res.type === "success") {
       return new Response(JSON.stringify(res.response), { status: 200 });

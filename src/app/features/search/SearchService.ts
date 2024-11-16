@@ -1,12 +1,14 @@
 import { GetUnsplashPhotos } from "@/app/types/Photos";
-import { generate } from "random-words";
 
 export const SearchService = {
-  async getPhotos(term: string): Promise<GetUnsplashPhotos | undefined> {
-    const searchTerm = term || (generate() as string);
+  async getPhotos(
+    term: string,
+    page: number = 1
+  ): Promise<GetUnsplashPhotos | undefined> {
+    const searchTerm = term;
     try {
       const response = await fetch(
-        `/api/search?term=${encodeURIComponent(searchTerm)}`,
+        `/api/search?term=${encodeURIComponent(searchTerm)}&page=${page}`,
         {
           method: "GET",
         }

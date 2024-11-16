@@ -7,7 +7,7 @@ export type SearchContentsProps = {
 };
 
 export default function SearchContents({ photos }: SearchContentsProps) {
-  return (
+  return photos?.length ? (
     <div className="search-content masonry sm:masonry-sm md:masonry-md">
       {photos.map((photo, i) => {
         return (
@@ -31,5 +31,7 @@ export default function SearchContents({ photos }: SearchContentsProps) {
         );
       })}
     </div>
-  );
+  ) : photos?.length === 0 ? (
+    <div>No data available</div>
+  ) : null;
 }
