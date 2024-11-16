@@ -7,7 +7,7 @@ import {
   useSearchContext,
   useSearchDispatchContext,
 } from "@/app/contexts/SearchContext";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import Pagination from "../../components/Pagination/Pagination";
 import MasonryPhotos from "@/app/components/MasonryPhotos/MasonryPhotos";
@@ -29,24 +29,30 @@ function SearchFeatureContent() {
     window.scrollTo({ top: 0 });
   };
 
-  const fetchPhotos = async (value: string, page: number) => {
-    const result = await UnsplashPhotoService.getPhotos(value, page);
-    if (result?.results?.length) {
-      updateResults(result.results);
-      updateTotalPages(result.total_pages);
-    }
-  };
+  const fetchPhotos = useCallback(
+    async (term: string, page: number) => {
+      const result = await UnsplashPhotoService.getPhotos(term, page);
+      if (result?.results) {
+        updateResults(result.results);
+      }
+
+      if (result?.total_pages) {
+        updateTotalPages(result.total_pages);
+      }
+    },
+    [updateResults, updateTotalPages]
+  );
 
   useEffect(() => {
     if (term) {
       fetchPhotos(term, page);
     }
-  }, [term, page]);
+  }, [term, page, fetchPhotos]);
 
   useEffect(() => {
     updateTerm(debouncedValue);
     updatePage(1);
-  }, [debouncedValue]);
+  }, [debouncedValue, updatePage, updateTerm]);
 
   return (
     <div className="flex flex-col gap-12 items-center">

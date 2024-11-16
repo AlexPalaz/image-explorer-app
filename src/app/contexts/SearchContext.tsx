@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useCallback, useContext, useReducer } from "react";
 import { UnsplashPhoto } from "../types/Photos";
 import { generate } from "random-words";
 
@@ -83,17 +83,41 @@ export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const updateTerm = (payload: string) =>
-    dispatch({
-      type: EAction.UpdateTerm,
-      payload: payload || (generate() as string),
-    });
-  const updatePage = (payload: number) =>
-    dispatch({ type: EAction.UpdatePage, payload });
-  const updateTotalPages = (payload: number) =>
-    dispatch({ type: EAction.UpdateTotalPages, payload });
-  const updateResults = (payload: UnsplashPhoto[]) =>
-    dispatch({ type: EAction.UpdateResults, payload });
+  const updateTerm = useCallback(
+    (payload: string) =>
+      dispatch({
+        type: EAction.UpdateTerm,
+        payload: payload || (generate() as string),
+      }),
+    [dispatch]
+  );
+
+  const updatePage = useCallback(
+    (payload: number) =>
+      dispatch({
+        type: EAction.UpdatePage,
+        payload,
+      }),
+    [dispatch]
+  );
+
+  const updateTotalPages = useCallback(
+    (payload: number) =>
+      dispatch({
+        type: EAction.UpdateTotalPages,
+        payload,
+      }),
+    [dispatch]
+  );
+
+  const updateResults = useCallback(
+    (payload: UnsplashPhoto[]) =>
+      dispatch({
+        type: EAction.UpdateResults,
+        payload,
+      }),
+    [dispatch]
+  );
 
   return (
     <SearchContext.Provider value={state}>
