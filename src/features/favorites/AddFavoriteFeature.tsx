@@ -7,6 +7,7 @@ import {
 } from "@/components/Icons/Icons";
 import { FavoriteService } from "@/services/FavoriteService";
 import { getUser } from "@/utils/supabase/server";
+import { UnsplashPhotoService } from "@/services/UnsplashPhotoService";
 
 export type AddFavoriteFeatureProps = {
   id: string;

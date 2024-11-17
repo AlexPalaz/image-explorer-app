@@ -45,11 +45,11 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
 
-    const { photo_id } = body;
+    const { photo, photo_id } = body;
 
-    if (!user_id || !photo_id) {
+    if (!user_id || !photo || !photo_id) {
       return new NextResponse(
-        "Missing required fields: user_id, photo_id",
+        "Missing required fields: user_id, photo",
         { status: 400 }
       );
     }
@@ -59,7 +59,8 @@ export async function POST(req: NextRequest) {
       .insert([
         {
           user_id,
-          photo_id,
+          photo,
+          photo_id
         },
       ])
       .select();

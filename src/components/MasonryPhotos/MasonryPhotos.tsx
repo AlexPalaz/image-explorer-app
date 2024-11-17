@@ -22,7 +22,7 @@ export default function MasonryPhotos({ photos }: MasonryPhotosProps) {
                   key={`image-content-${i}`}
                   width={photo.width}
                   height={photo.height}
-                  src={photo.urls.regular}
+                  src={photo.urls.small}
                   alt={photo.alt_description || ""}
                 />
               </Link>

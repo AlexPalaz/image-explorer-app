@@ -7,7 +7,7 @@ export type PhotoDetailProps = {
 
 export default function PhotoDetail({ photo }: PhotoDetailProps) {
   return (
-    <div className="border rounded overflow-hidden">
+    <div className="border rounded overflow-hidden h-max">
       <Image
         src={photo.urls.regular}
         width={photo.width}

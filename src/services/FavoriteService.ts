@@ -1,4 +1,5 @@
 import { CreatedFavorite, Favorite } from "@/types/Favorites";
+import { UnsplashPhoto } from "@/types/Photos";
 import { cookies } from "next/headers";
 
 export const FavoriteService = {
@@ -19,6 +20,7 @@ export const FavoriteService = {
   },
   async addFavoritePhoto(
     photo_id: string,
+    photo: UnsplashPhoto,
     baseUrl: string = ""
   ): Promise<CreatedFavorite | undefined> {
     try {
@@ -29,7 +31,7 @@ export const FavoriteService = {
           "Content-Type": "application/json",
           Authorization: token,
         },
-        body: JSON.stringify({ photo_id }),
+        body: JSON.stringify({ photo_id, photo }),
       });
 
       if (!response.ok) {
