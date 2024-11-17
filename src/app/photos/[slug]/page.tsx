@@ -20,7 +20,9 @@ export default async function PhotoDetailPage({
               <AddFavoriteFeature id={photoId} />
             </div>
           </div>
-          <CommentFeature id={photoId} />
+          <div className="px-2 pb-2">
+            <CommentFeature id={photoId} />
+          </div>
         </div>
       </Section>
     </div>

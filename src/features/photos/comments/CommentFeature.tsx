@@ -19,7 +19,7 @@ export default async function CommentFeature({ id }: CommentsFeatureProps) {
   const user = await getUser();
 
   return (
-    <div className="flex flex-col justify-between p-2">
+    <div className="flex flex-col justify-between h-full">
       <CommentList comments={comments} />
       <Form className="flex flex-col gap-4" action={addComment}>
         <input name="photo_id" className="hidden" defaultValue={id} />
