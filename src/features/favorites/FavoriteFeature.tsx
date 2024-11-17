@@ -20,7 +20,7 @@ export default async function FavoriteFeature() {
   }
 
   return (
-    <div className="favorite flex flex-col gap-2">
+    <div className="favorite grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {favorites.map((favorite, i) => {
         return (
           <Link
@@ -35,16 +35,16 @@ export default async function FavoriteFeature() {
               src={favorite.photo.urls.small}
             />
             <div>
-              <h4 className="text-sm mb-4">
+              <h4 className="text-xs mb-4">
                 <b>Saved:</b>
                 {new Date(favorite.created_at).toLocaleDateString("en-US")}
               </h4>
-              <h3 className="text-sm">
+              <h3 className="text-xs">
                 <b>Author: </b>
                 {favorite.photo.user.first_name} {favorite.photo.user.last_name}
               </h3>
               {favorite.photo.description && (
-                <p className="text-sm">
+                <p className="text-xs">
                   <b>Description: </b>
                   {favorite.photo.description}
                 </p>

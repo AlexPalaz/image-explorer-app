@@ -2,10 +2,9 @@
 
 import SearchBar from "@/components/SearchBar/SearchBar";
 
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import Pagination from "../../components/Pagination/Pagination";
-import MasonryPhotos from "@/components/MasonryPhotos/MasonryPhotos";
 import {
   SearchProvider,
   useSearchContext,
@@ -13,6 +12,8 @@ import {
 } from "@/contexts/SearchContext";
 import { UnsplashPhotoService } from "@/services/UnsplashPhotoService";
 import { ProviderRegistry } from "@/contexts/ProviderRegistry";
+import React from "react";
+import MasonryPhotos from "@/components/MasonryPhotos/MasonryPhotos";
 
 function SearchFeatureContent() {
   const { results, term, page, pages } = useSearchContext();
@@ -32,6 +33,7 @@ function SearchFeatureContent() {
 
   const fetchPhotos = useCallback(
     async (term: string, page: number) => {
+      updateResults(null!);
       const result = await UnsplashPhotoService.getPhotos(term, page);
       if (result?.results) {
         updateResults(result.results);
@@ -58,8 +60,10 @@ function SearchFeatureContent() {
   return (
     <div className="flex flex-col gap-12 items-center">
       <SearchBar value={searchValue} onChange={handleSearchChange} />
-      <MasonryPhotos photos={results} />
-      <Pagination onPageChange={handlePageChange} page={page} pages={pages} />
+      {results ? <MasonryPhotos photos={results} /> : "Loading"}
+      {results ? (
+        <Pagination onPageChange={handlePageChange} page={page} pages={pages} />
+      ) : null}
     </div>
   );
 }

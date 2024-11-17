@@ -26,14 +26,14 @@ export type SearchContextState = {
   term: string;
   pages: number;
   page: number;
-  results: UnsplashPhoto[];
+  results: UnsplashPhoto[] | null;
 };
 
 const initialState: SearchContextState = {
   term: "",
   pages: 0,
   page: 1,
-  results: [],
+  results: null,
 };
 
 const reducer = (

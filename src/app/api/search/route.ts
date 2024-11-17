@@ -1,6 +1,10 @@
 import { unsplash } from "@/utils/unsplash";
 import { NextRequest } from "next/server";
 
+function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -10,7 +14,10 @@ export async function GET(req: NextRequest) {
     const res = await unsplash.search.getPhotos({
       query: term as string,
       page: page as number,
+      perPage: 12,
     });
+
+    await delay(2000);
 
     if (res.type === "success") {
       return new Response(JSON.stringify(res.response), { status: 200 });
