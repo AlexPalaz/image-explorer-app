@@ -1,5 +1,6 @@
 import { createClient } from "@/app/utils/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
+import { generate } from "random-words";
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,6 +16,11 @@ export async function POST(req: NextRequest) {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          username: (generate() as string) + Math.floor(Math.random() * 10000),
+        },
+      },
     });
 
     if (error) {
@@ -22,7 +28,7 @@ export async function POST(req: NextRequest) {
     }
 
     return new NextResponse(JSON.stringify({ data }), { status: 200 });
-  } catch (error) {
+  } catch (_) {
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
