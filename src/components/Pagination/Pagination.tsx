@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@/app/utils/icons";
+import { ChevronLeftIcon, ChevronRightIcon } from "@/utils/icons";
 
 export type PaginationProps = {
   page: number;
@@ -14,7 +14,9 @@ export default function Pagination({
   const maxPages = 200; // FIXME: Limit to 200 pages max because Unsplash is not showing contents after page 200
   const totalPages = Math.min(pages, maxPages);
 
-  if (totalPages <= 1) return null;
+  if (!totalPages) return null;
+
+  if (totalPages <= 1) return "That's it!"
 
   const visiblePages = getVisiblePages(page, totalPages);
 

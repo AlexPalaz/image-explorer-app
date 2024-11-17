@@ -1,4 +1,4 @@
-import { UnsplashPhoto } from "@/app/types/Photos";
+import { UnsplashPhoto } from "@/types/Photos";
 import Image from "next/image";
 
 export type PhotoDetailProps = {

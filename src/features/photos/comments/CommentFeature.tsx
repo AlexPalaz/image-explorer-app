@@ -1,9 +1,9 @@
-import SubmitButton from "@/app/components/SubmitButton/SubmitButton";
-import { CommentService } from "@/app/services/CommentService";
-import { getUser } from "@/app/utils/supabase/server";
+import SubmitButton from "@/components/SubmitButton/SubmitButton";
+import { getUser } from "@/utils/supabase/server";
 import Form from "next/form";
 import { addComment } from "./actions";
-import CommentList from "@/app/components/CommentList/CommentList";
+import CommentList from "@/components/CommentList/CommentList";
+import { CommentService } from "@/services/CommentService";
 
 export type CommentsFeatureProps = {
   id: string;

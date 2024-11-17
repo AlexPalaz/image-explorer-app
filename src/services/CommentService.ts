@@ -1,4 +1,4 @@
-import { Comment, CreatedComment } from "../types/Comments";
+import { Comment, CreatedComment } from "@/types/Comments";
 
 export const CommentService = {
   async getPhotoComments(

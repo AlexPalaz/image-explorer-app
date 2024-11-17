@@ -1,4 +1,4 @@
-import { getUser } from "@/app/utils/supabase/server";
+import { getUser } from "@/utils/supabase/server";
 import Route from "./Route/Route";
 
 export default async function Header() {
@@ -10,6 +10,7 @@ export default async function Header() {
         <Route name="Home" href="/" />
         {!user && (<Route name="Sign up" href="/auth/signup" />)}
         {!user && (<Route name="Sign in" href="/auth/signin" />)}
+        {user && (<Route name="Favorites" href="/favorites" />)}
       </div>
     </div>
   );

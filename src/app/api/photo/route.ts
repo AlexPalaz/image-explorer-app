@@ -1,4 +1,4 @@
-import { unsplash } from "@/app/utils/unsplash";
+import { unsplash } from "@/utils/unsplash";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {

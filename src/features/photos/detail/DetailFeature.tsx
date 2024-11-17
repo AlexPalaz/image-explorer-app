@@ -1,5 +1,5 @@
-import PhotoDetail from "@/app/components/PhotoDetail/PhotoDetail";
-import { UnsplashPhotoService } from "@/app/services/UnsplashPhotoService";
+import PhotoDetail from "@/components/PhotoDetail/PhotoDetail";
+import { UnsplashPhotoService } from "@/services/UnsplashPhotoService";
 
 export type PhotoDetailFeatureProps = {
   id: string;

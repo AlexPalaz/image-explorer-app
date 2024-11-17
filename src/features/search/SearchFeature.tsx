@@ -1,17 +1,18 @@
 "use client";
 
-import SearchBar from "@/app/components/SearchBar/SearchBar";
-import { ProviderRegistry } from "@/app/contexts/ProviderRegistry";
+import SearchBar from "@/components/SearchBar/SearchBar";
+
+import { useCallback, useEffect, useState } from "react";
+import { useDebounce } from "use-debounce";
+import Pagination from "../../components/Pagination/Pagination";
+import MasonryPhotos from "@/components/MasonryPhotos/MasonryPhotos";
 import {
   SearchProvider,
   useSearchContext,
   useSearchDispatchContext,
-} from "@/app/contexts/SearchContext";
-import { useCallback, useEffect, useState } from "react";
-import { useDebounce } from "use-debounce";
-import Pagination from "../../components/Pagination/Pagination";
-import MasonryPhotos from "@/app/components/MasonryPhotos/MasonryPhotos";
-import { UnsplashPhotoService } from "@/app/services/UnsplashPhotoService";
+} from "@/contexts/SearchContext";
+import { UnsplashPhotoService } from "@/services/UnsplashPhotoService";
+import { ProviderRegistry } from "@/contexts/ProviderRegistry";
 
 function SearchFeatureContent() {
   const { results, term, page, pages } = useSearchContext();

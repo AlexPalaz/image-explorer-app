@@ -1,6 +1,6 @@
-import SubmitButton from "@/app/components/SubmitButton/SubmitButton";
+import SubmitButton from "@/components/SubmitButton/SubmitButton";
 import Form from "next/form";
-import FormMessage from "@/app/components/FormMessage/FormMessage";
+import FormMessage from "@/components/FormMessage/FormMessage";
 import { signIn } from "./actions";
 
 export default function SignIn() {

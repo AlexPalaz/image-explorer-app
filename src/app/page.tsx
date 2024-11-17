@@ -1,5 +1,5 @@
-import Section from "./components/Section/Section";
-import SearchFeature from "./features/search/SearchFeature";
+import Section from "../components/Section/Section";
+import SearchFeature from "../features/search/SearchFeature";
 
 export default async function HomePage() {
   return (

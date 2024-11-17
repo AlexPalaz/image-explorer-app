@@ -1,7 +1,7 @@
-import SubmitButton from "@/app/components/SubmitButton/SubmitButton";
+import SubmitButton from "@/components/SubmitButton/SubmitButton";
 import Form from "next/form";
 import { signUp } from "./actions";
-import FormMessage from "@/app/components/FormMessage/FormMessage";
+import FormMessage from "@/components/FormMessage/FormMessage";
 
 export default function SignUp() {
   return (

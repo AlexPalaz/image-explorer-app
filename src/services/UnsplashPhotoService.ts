@@ -1,4 +1,4 @@
-import { GetUnsplashPhotos, UnsplashPhoto } from "@/app/types/Photos";
+import { GetUnsplashPhotos, UnsplashPhoto } from "@/types/Photos";
 
 export const UnsplashPhotoService = {
   async getPhotos(

@@ -1,4 +1,4 @@
-import { Comment as CommentType } from "@/app/types/Comments";
+import { Comment as CommentType } from "@/types/Comments";
 import Comment from "../Comment/Comment";
 
 export type CommentListProps = {

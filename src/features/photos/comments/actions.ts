@@ -1,7 +1,7 @@
 "use server";
 
-import { CommentService } from "@/app/services/CommentService";
-import { getUser } from "@/app/utils/supabase/server";
+import { getUser } from "@/utils/supabase/server";
+import { CommentService } from "@/services/CommentService";
 import { revalidatePath } from "next/cache";
 
 export async function addComment(formData: FormData) {
