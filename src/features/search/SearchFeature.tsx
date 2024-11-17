@@ -2,7 +2,7 @@
 
 import SearchBar from "@/components/SearchBar/SearchBar";
 
-import { Suspense, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import Pagination from "../../components/Pagination/Pagination";
 import {

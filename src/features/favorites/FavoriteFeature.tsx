@@ -24,6 +24,7 @@ export default async function FavoriteFeature() {
       {favorites.map((favorite, i) => {
         return (
           <Link
+            key={`favorite-${i}`}
             href={"/photos/" + favorite.photo_id}
             className="w-full border rounded flex gap-6 p-2 items-center"
           >
