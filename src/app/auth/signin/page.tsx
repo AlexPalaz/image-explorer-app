@@ -5,7 +5,7 @@ import { signIn } from "./actions";
 
 export default function SignIn() {
   return (
-    <div className="w-full h-screen flex items-center justify-center">
+    <div className="w-full h-[85vh] flex items-center justify-center">
       <div className="bg-amber-100 p-4 rounded max-w-[320px]">
         <h2 className="font-semibold text-center">
           Sign in

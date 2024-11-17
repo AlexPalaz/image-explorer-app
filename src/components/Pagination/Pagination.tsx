@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@/utils/icons";
+import { ChevronLeftIcon, ChevronRightIcon } from "../Icons/Icons";
 
 export type PaginationProps = {
   page: number;
@@ -16,7 +16,7 @@ export default function Pagination({
 
   if (!totalPages) return null;
 
-  if (totalPages <= 1) return "That's it!"
+  if (totalPages <= 1) return "That's it!";
 
   const visiblePages = getVisiblePages(page, totalPages);
 

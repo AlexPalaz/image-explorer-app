@@ -6,19 +6,19 @@ export async function GET(req: NextRequest) {
   try {
     const supabase = await createClient();
     const { searchParams } = new URL(req.url);
-    const photoId = searchParams.get("id");
+    const userId = searchParams.get("id");
 
-    if (!photoId) {
-      return new NextResponse("photo_id is required", { status: 400 });
+    if (!userId) {
+      return new NextResponse("user_id is required", { status: 400 });
     }
 
     const { data, error } = await supabase
-      .from("comments")
+      .from("favorites")
       .select("*")
-      .eq("photo_id", photoId);
+      .eq("user_id", userId);
 
     if (error) {
-      return new NextResponse(`Error fetching comments: ${error.message}`, {
+      return new NextResponse(`Error fetching favorites: ${error.message}`, {
         status: 500,
       });
     }
@@ -41,37 +41,36 @@ export async function POST(req: NextRequest) {
     const supabase = await createClient();
     const token = (await headers()).get('Authorization');
     const user = await supabase.auth.getUser(token as string);
-    const username = user.data.user?.email;
+    const user_id = user.data.user?.id;
 
     const body = await req.json();
 
-    const { photo_id, comment } = body;
+    const { photo_id } = body;
 
-    if (!username || !photo_id || !comment) {
+    if (!user_id || !photo_id) {
       return new NextResponse(
-        "Missing required fields: username, photo_id, comment",
+        "Missing required fields: user_id, photo_id",
         { status: 400 }
       );
     }
 
     const { data, error } = await supabase
-      .from("comments")
+      .from("favorites")
       .insert([
         {
-          username,
+          user_id,
           photo_id,
-          comment,
         },
       ])
       .select();
 
     if (error) {
-      return new NextResponse(`Error adding comment: ${error.message}`, {
+      return new NextResponse(`Error adding favorite: ${error.message}`, {
         status: 500,
       });
     }
 
-    return NextResponse.json({ message: "Comment added successfully", data });
+    return NextResponse.json({ message: "Favorite photo added successfully", data });
   } catch (error) {
     if (error instanceof Error) {
       return new Response(`Error: ${error.message}`, {

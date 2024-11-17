@@ -5,7 +5,7 @@ export type PhotoDetailFeatureProps = {
   id: string;
 };
 
-export default async function PhotoDetailFeature({
+export default async function DetailFeature({
   id,
 }: PhotoDetailFeatureProps) {
   if (!id) return null;
