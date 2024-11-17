@@ -2,17 +2,6 @@ import { NextResponse, type NextRequest } from "next/server";
 import { getUser, refreshSession } from "./utils/supabase/server";
 
 export async function middleware(request: NextRequest) {
-
-  if (request.nextUrl.pathname === "/logout") {
-    const response = NextResponse.redirect(new URL("/", request.url));
-    response.cookies.delete("access-token");
-    response.cookies.delete("refresh-token");
-   
-    console.log("Response cookies:", response.cookies.getAll());
-   
-    return response;
-  }
-
   const user = await getUser();
 
   if (user == null) {
