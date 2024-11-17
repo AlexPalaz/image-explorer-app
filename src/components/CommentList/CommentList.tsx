@@ -7,7 +7,7 @@ export type CommentListProps = {
 
 export default function CommentList({ comments }: CommentListProps) {
   return (
-    <div className="grow h-0 overflow-y-auto">
+    <div className="grow md:h-0 overflow-y-auto">
       <h2 className="font-semibold sticky top-0 bg-white">Comments:</h2>
       <ul className="py-4 flex flex-col gap-2">
         {comments?.length ? (
