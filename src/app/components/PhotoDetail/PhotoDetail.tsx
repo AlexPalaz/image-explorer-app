@@ -16,9 +16,16 @@ export default function PhotoDetail({ photo }: PhotoDetailProps) {
       />
       <div className="px-4 mt-4 mb-2">
         <h3 className="font-semibold">
-          Author: {photo.user.first_name} {photo.user.last_name || ""}
-          <b> @{photo.user.instagram_username}</b>
+          Author:{" "}
+          <b>
+            {photo.user.first_name} {photo.user.last_name || ""}
+          </b>
         </h3>
+        {photo.user.instagram_username && (
+          <h4 className="font-semibold text-sm">
+            <b>@{photo.user.instagram_username}</b>
+          </h4>
+        )}
         <p className="text-sm text-gray-500 mt-2">
           Location: {photo?.user?.location || "Unknown"}
         </p>

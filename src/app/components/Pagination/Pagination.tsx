@@ -11,9 +11,12 @@ export default function Pagination({
   pages,
   onPageChange,
 }: PaginationProps) {
-  if (pages <= 1) return null;
+  const maxPages = 200; // FIXME: Limit to 200 pages max because Unsplash is not showing contents after page 200
+  const totalPages = Math.min(pages, maxPages);
 
-  const visiblePages = getVisiblePages(page, pages);
+  if (totalPages <= 1) return null;
+
+  const visiblePages = getVisiblePages(page, totalPages);
 
   return (
     <div className="flex gap-2">
@@ -42,7 +45,7 @@ export default function Pagination({
           </button>
         )
       )}
-      {page < pages && (
+      {page < totalPages && (
         <button
           className={`border rounded p-1 ml-4 hover:bg-black hover:text-white transition-all`}
           onClick={() => onPageChange(page + 1)}

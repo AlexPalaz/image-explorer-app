@@ -17,9 +17,5 @@ export default async function PhotoDetailFeature({
 
   if (!photo) return "Image not available";
 
-  return (
-    <div>
-      <PhotoDetail photo={photo} />
-    </div>
-  );
+  return <PhotoDetail photo={photo} />;
 }

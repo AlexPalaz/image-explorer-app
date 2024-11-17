@@ -1,4 +1,4 @@
-import { getUser } from "@/app/utils/supabase/client";
+import { getUser } from "@/app/utils/supabase/server";
 import Route from "./Route/Route";
 
 export default async function Header() {
