@@ -30,7 +30,7 @@ export default async function FavoriteFeature() {
           >
             <Image
               className="rounded"
-              width={200}
+              width={100}
               height={200}
               alt={favorite.photo.alt_description || ""}
               src={favorite.photo.urls.small}
@@ -45,7 +45,7 @@ export default async function FavoriteFeature() {
                 {favorite.photo.user.first_name} {favorite.photo.user.last_name}
               </h3>
               {favorite.photo.description && (
-                <p className="text-xs">
+                <p className="text-xs line-clamp-3">
                   <b>Description: </b>
                   {favorite.photo.description}
                 </p>
