@@ -34,6 +34,7 @@ export default async function FavoriteFeature() {
               height={200}
               alt={favorite.photo.alt_description || ""}
               src={favorite.photo.urls.small}
+              unoptimized
             />
             <div>
               <h4 className="text-xs mb-4">
