@@ -1,6 +1,10 @@
 "use client";
 
+import { useEffect } from "react";
+
 export default function SignOut() {
-  window.location.href = "/";
+  useEffect(() => {
+    window.location.href = "/";
+  }, []);
   return <></>;
 }
