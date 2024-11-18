@@ -32,7 +32,7 @@ export type SearchContextState = {
 const initialState: SearchContextState = {
   term: "",
   pages: 0,
-  page: 1,
+  page: 0,
   results: null,
 };
 

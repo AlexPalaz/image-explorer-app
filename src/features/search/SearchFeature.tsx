@@ -14,8 +14,12 @@ import { UnsplashPhotoService } from "@/services/UnsplashPhotoService";
 import { ProviderRegistry } from "@/contexts/ProviderRegistry";
 import React from "react";
 import MasonryPhotos from "@/components/MasonryPhotos/MasonryPhotos";
+import { useRouter, useSearchParams } from "next/navigation";
 
 function SearchFeatureContent() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
   const { results, term, page, pages } = useSearchContext();
   const { updateTerm, updateResults, updatePage, updateTotalPages } =
     useSearchDispatchContext();
@@ -46,6 +50,21 @@ function SearchFeatureContent() {
     [updateResults, updateTotalPages]
   );
 
+  const createQueryString = useCallback(
+    (paramsArray: Array<{ name: string; value: string }>) => {
+      const params = new URLSearchParams(searchParams.toString());
+
+      paramsArray.forEach(({ name, value }) => {
+        params.set(name, value);
+      });
+
+      router.replace(`?${params.toString()}`);
+
+      return params.toString();
+    },
+    [router, searchParams]
+  );
+
   useEffect(() => {
     if (term) {
       fetchPhotos(term, page);
@@ -53,8 +72,28 @@ function SearchFeatureContent() {
   }, [term, page, fetchPhotos]);
 
   useEffect(() => {
-    updateTerm(debouncedValue);
-    updatePage(1);
+    if (page && term) {
+      createQueryString([
+        {
+          name: "page",
+          value: page.toString(),
+        },
+        {
+          name: "term",
+          value: term,
+        },
+      ]);
+    }
+  }, [page, term]);
+
+  useEffect(() => {
+    updateTerm(debouncedValue || searchParams.get("term") || "");
+
+    if (debouncedValue) {
+      updatePage(1);
+    } else {
+      updatePage(parseInt(searchParams.get("page") || "") || 1);
+    }
   }, [debouncedValue, updatePage, updateTerm]);
 
   return (
