@@ -1,5 +1,6 @@
 import { getUser } from "@/utils/supabase/server";
 import Route from "./Route/Route";
+import Logout from "./Logout/Logout";
 
 export default async function Header() {
   const user = await getUser();
@@ -11,7 +12,7 @@ export default async function Header() {
         {!user && <Route name="Sign up" href="/auth/signup" />}
         {!user && <Route name="Sign in" href="/auth/signin" />}
         {user && <Route name="Favorites" href="/favorites" />}
-        {user && <Route name="Logout" href="/auth/signout" />}
+        {user && <Logout name="Logout" />}
       </div>
     </div>
   );
