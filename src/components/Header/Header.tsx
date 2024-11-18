@@ -11,7 +11,7 @@ export default async function Header() {
         {!user && <Route name="Sign up" href="/auth/signup" />}
         {!user && <Route name="Sign in" href="/auth/signin" />}
         {user && <Route name="Favorites" href="/favorites" />}
-        {user && <Route name="Logout" href="/logout" />}
+        {user && <Route name="Logout" href="/auth/signout" />}
       </div>
     </div>
   );

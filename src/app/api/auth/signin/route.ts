@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -17,11 +18,16 @@ export async function POST(req: NextRequest) {
       password,
     });
 
+    const cookieStore = await cookies();
+    const sessionCookie = cookieStore.getAll();
+
     if (error) {
       return new NextResponse(error.message, { status: 400 });
     }
 
-    return new NextResponse(JSON.stringify({ data }), { status: 200 });
+    return new NextResponse(JSON.stringify({ data, cookies: sessionCookie }), {
+      status: 200,
+    });
   } catch {
     return new NextResponse("Internal Server Error", { status: 500 });
   }

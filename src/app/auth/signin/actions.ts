@@ -1,6 +1,7 @@
 "use server";
 
 import { AuthTokenResponsePassword } from "@supabase/supabase-js";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -24,11 +25,17 @@ export async function signIn(formData: FormData) {
     redirect(`/auth/signin?message=${errorMessage}`);
   }
 
-  const { data } = (await response.json()) as AuthTokenResponsePassword;
+  const { data, cookies: sessionCookies } =
+    (await response.json()) as AuthTokenResponsePassword & {
+      cookies: RequestCookie[];
+    };
   const session = data.session;
+  const cookieStore = await cookies();
 
   if (session) {
-    const cookieStore = await cookies();
+    sessionCookies.forEach((cookie) =>
+      cookieStore.set(cookie.name, cookie.value, { secure: true })
+    );
     cookieStore.set("access-token", session.access_token, { secure: true });
     cookieStore.set("refresh-token", session.refresh_token, { secure: true });
   }
