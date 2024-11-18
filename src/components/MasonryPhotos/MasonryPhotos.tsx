@@ -7,7 +7,7 @@ export type MasonryPhotosProps = {
 };
 
 export default function MasonryPhotos({ photos }: MasonryPhotosProps) {
-  return (
+  return photos ? (
     <div className="search-content masonry sm:masonry-sm md:masonry-md">
       {photos.map((photo, i) => {
         return (
@@ -31,5 +31,7 @@ export default function MasonryPhotos({ photos }: MasonryPhotosProps) {
         );
       })}
     </div>
+  ) : (
+    "No data available"
   );
 }

@@ -33,7 +33,7 @@ export default async function PhotoDetailPage({
           <div className="max-w-[480px] relative m-auto">
             <DetailFeature photo={photo} />
             <div className="absolute top-2 right-2 md:bottom-2 md:top-auto">
-              <AddFavoriteFeature id={photoId} photo={photo} />
+              <AddFavoriteFeature id={photoId} />
             </div>
           </div>
           <div className="px-2 pb-2">

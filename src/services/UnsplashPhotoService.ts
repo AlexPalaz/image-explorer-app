@@ -18,6 +18,7 @@ export const UnsplashPhotoService = {
       return data;
     } catch (error) {
       console.error(error);
+      return { results: [], total: 0, total_pages: 0 } as GetUnsplashPhotos;
     }
   },
   async getPhoto(
