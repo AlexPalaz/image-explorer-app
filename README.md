@@ -1,6 +1,6 @@
 ## Vercel url: https://image-explorer-app.vercel.app/
 
-## Built with: React, Next.js, Supabase, Vercel Deploy
+### Built with: React, Next.js, Supabase, Vercel Deploy
 
 ## How to Run Locally
 
