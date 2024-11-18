@@ -24,6 +24,7 @@ export default function MasonryPhotos({ photos }: MasonryPhotosProps) {
                   height={photo.height}
                   src={photo.urls.small}
                   alt={photo.alt_description || ""}
+                  unoptimized
                 />
               </Link>
             </div>
