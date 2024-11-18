@@ -88,10 +88,5 @@ export async function updateSession(request: NextRequest) {
     supabaseResponse.cookies.set("user", JSON.stringify(""));
   }
 
-  if (request.nextUrl.pathname.startsWith("/auth/signout")) {
-    supabaseResponse.cookies.set("user", JSON.stringify(""));
-    await supabase.auth.signOut();
-  }
-
   return supabaseResponse;
 }
