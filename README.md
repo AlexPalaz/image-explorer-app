@@ -48,9 +48,9 @@ Image Explorer App is an application developed to display images from the Unspla
 
 ### **Frontend**
 
-The frontend of the app is built with **Next.js 15**, utilizing **Context API** for state management, particularly to handle the dynamic display of images and pagination. Context API is ideal in this case because it allows for centralized state management, making it easier to pass down state through the component tree, especially for components that need to update or react to the images displayed and user interactions.
+The frontend of the app is built with **Next.js 15**, using **Context API** for state management, especially to handle the dynamic display of images and pagination and `useSearchParams`, `useRouter` to maintain a persistent history during the navigation. Context API is ideal in this case because it allows for centralized state management, making it easier to pass down state through the component tree, especially for components that need to update or react to the images displayed and user interactions.
 
-For pages that require dynamic content fetching (like the **Detail** and **Favorites** pages), **Server Side Rendering (SSR)** is employed. SSR ensures that the content is generated on the server side before being sent to the client, which helps with SEO and initial page load performance. This also improves the user experience by displaying the content more quickly.
+For pages that require dynamic content fetching (like the **Detail** and **Favorites** pages), **Server Side Rendering (SSR)** has been chosen. SSR ensures that the content is generated on the server side before being sent to the client, which helps with SEO and initial page load performance. This also improves the user experience by displaying the content more quickly.
 
 The app leverages **Server Actions** in combination with **Next Form** to handle form submissions for adding comments and saving favorite images. Using Server Actions ensures that these operations (such as saving comments or toggling favorites) are handled securely on the server side, keeping sensitive operations away from the client.
 
