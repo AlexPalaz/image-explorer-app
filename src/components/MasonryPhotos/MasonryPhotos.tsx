@@ -7,7 +7,7 @@ export type MasonryPhotosProps = {
 };
 
 export default function MasonryPhotos({ photos }: MasonryPhotosProps) {
-  return photos ? (
+  return photos?.length ? (
     <div className="search-content masonry sm:masonry-sm md:masonry-md">
       {photos.map((photo, i) => {
         return (
@@ -33,6 +33,6 @@ export default function MasonryPhotos({ photos }: MasonryPhotosProps) {
       })}
     </div>
   ) : (
-    "No data available"
+    "Unsplash API Rate limit exceed. Try next hour."
   );
 }
