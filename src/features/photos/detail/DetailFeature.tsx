@@ -1,20 +1,13 @@
 import PhotoDetail from "@/components/PhotoDetail/PhotoDetail";
-import { UnsplashPhotoService } from "@/services/UnsplashPhotoService";
+import { UnsplashPhoto } from "@/types/Photos";
 
 export type PhotoDetailFeatureProps = {
-  id: string;
+  photo: UnsplashPhoto | void;
 };
 
 export default async function DetailFeature({
-  id,
+  photo,
 }: PhotoDetailFeatureProps) {
-  if (!id) return null;
-
-  const photo = await UnsplashPhotoService.getPhoto(
-    id,
-    process.env.NEXT_PUBLIC_BASE_URL
-  );
-
   if (!photo) return "Image not available";
 
   return <PhotoDetail photo={photo} />;

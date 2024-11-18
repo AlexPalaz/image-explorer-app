@@ -7,23 +7,22 @@ import {
 } from "@/components/Icons/Icons";
 import { FavoriteService } from "@/services/FavoriteService";
 import { getUser } from "@/utils/supabase/server";
+import { UnsplashPhoto } from "@/types/Photos";
 
 export type AddFavoriteFeatureProps = {
   id: string;
+  photo: UnsplashPhoto | void;
 };
 
 export default async function AddFavoriteFeature({
   id,
+  photo,
 }: AddFavoriteFeatureProps) {
+  if (!photo) return null;
+
   const user = await getUser();
 
-  if (!user) {
-    return (
-      <Form action="/auth/signin">
-        <SubmitButton label={<FavoritedSolidIcon />} />
-      </Form>
-    );
-  }
+  if (!user) return null;
 
   const favorites = await FavoriteService.getFavoritePhotos(
     user.id,

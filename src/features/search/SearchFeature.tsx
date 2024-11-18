@@ -2,7 +2,7 @@
 
 import SearchBar from "@/components/SearchBar/SearchBar";
 
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import Pagination from "../../components/Pagination/Pagination";
 import {
@@ -110,7 +110,9 @@ function SearchFeatureContent() {
 export default function SearchFeature() {
   return (
     <ProviderRegistry providers={[SearchProvider]}>
-      <SearchFeatureContent />
+      <Suspense>
+        <SearchFeatureContent />
+      </Suspense>
     </ProviderRegistry>
   );
 }
