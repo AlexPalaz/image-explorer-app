@@ -13,6 +13,7 @@ export default function PhotoDetail({ photo }: PhotoDetailProps) {
         width={photo.width}
         height={photo.height}
         alt={photo.alt_description || ""}
+        unoptimized
       />
       <div className="px-4 mt-4 mb-2">
         <h3 className="font-semibold">
